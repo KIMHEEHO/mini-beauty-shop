@@ -1,6 +1,9 @@
 import { AppBar, Toolbar } from "@mui/material";
-
+import { useCartStore } from "../store/useCartStore";
 export function Navbar() {
+  const cart = useCartStore((state) => state.cart);
+
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <>
       <AppBar
@@ -9,6 +12,7 @@ export function Navbar() {
           backgroundColor: "#ffffff",
           color: "#1f2937",
           boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+          zIndex: 1200,
         }}
       >
         <Toolbar className="max-w-6xl w-full mx-auto flex justify-between items-center px-4">
@@ -21,11 +25,17 @@ export function Navbar() {
           <span className="font-extrabold text-xl tracking-tight text-pink-500 select-none">
             mini-beauty-shop ✨
           </span>
-
           <div className="flex-1 flex justify-end items-center text-gray-600 hover:text-pink-500 cursor-pointer">
-            <span>
-              <i className="fa-solid fa-cart-arrow-down"></i>
-            </span>
+            <div className="relative">
+              <span>
+                <i className="fa-solid fa-cart-arrow-down text-xl"></i>
+              </span>
+              {totalQuantity > 0 && (
+                <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">
+                  {totalQuantity}
+                </span>
+              )}
+            </div>
           </div>
         </Toolbar>
       </AppBar>
