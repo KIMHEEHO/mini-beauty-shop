@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./component/NavBar";
 import ProductList from "./component/ProductList";
 import CartPage from "./page/CartPage";
+import OrderComplete from "./page/OrderComplete";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ProductList />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/order-complete" element={<OrderComplete />} />
           </Routes>
         </main>
       </div>

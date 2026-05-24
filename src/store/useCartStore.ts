@@ -8,6 +8,7 @@ interface CartState {
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
+  increaseQuantity: (productId: number) => void;
   clearCart: () => void;
 }
 
@@ -51,6 +52,15 @@ export const useCartStore = create<CartState>()(
                 : item,
             )
             .filter((item) => item.quantity > 0),
+        })),
+      // 상품 수량 증가시키기
+      increaseQuantity: (productId) =>
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item.id === productId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item,
+          ),
         })),
       // 🧹 장바구니 전체 비우기
       clearCart: () => set({ cart: [] }),

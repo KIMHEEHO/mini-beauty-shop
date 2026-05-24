@@ -26,7 +26,7 @@ export default function ProductItem({ product }: { product: Product }) {
             onClick={() => {
               addToCart(product);
             }}
-            className="w-full bg-pink-500 text-white font-medium px-4 py-2.5 rounded-xl hover:bg-pink-600 transition shadow-sm"
+            className="w-full bg-pink-500 text-white font-medium px-4 py-2.5 rounded-xl cursor-pointer hover:bg-pink-600 transition shadow-sm"
           >
             장바구니에 담기
           </button>
