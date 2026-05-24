@@ -1,27 +1,21 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import type { TabValue } from "./types";
 
-type TabValue =
-  | "lifting"
-  | "botox"
-  | "filler"
-  | "skin-care"
-  | "skin-booster"
-  | "diet";
-
-export function CategoryTab() {
-  const [tab, setTab] = useState<TabValue>("lifting");
-
+interface CategoryTabProps {
+  currentTab: TabValue;
+  changeTab: (newTab: TabValue) => void;
+}
+export function CategoryTab({ currentTab, changeTab }: CategoryTabProps) {
   const changeTabs = (event: React.SyntheticEvent, newValue: TabValue) => {
-    setTab(newValue);
+    changeTab(newValue);
   };
 
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs
-        value={tab}
+        value={currentTab}
         onChange={changeTabs}
         textColor="secondary"
         indicatorColor="secondary"
