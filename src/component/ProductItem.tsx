@@ -1,9 +1,12 @@
-import { Grid } from "@mui/material";
-import type { Product } from "./types";
-import { useCartStore } from "../store/useCartStore";
+import { Grid, Snackbar, Alert } from "@mui/material";
+import type { Product } from "./types.js";
+import { useCartStore } from "../store/useCartStore.js";
+import { useState } from "react";
 
 export default function ProductItem({ product }: { product: Product }) {
   const addToCart = useCartStore((state) => state.addToCart);
+  const [open, setOpen] = useState(false);
+
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-full flex flex-col justify-between hover:shadow-md transition">
@@ -25,12 +28,23 @@ export default function ProductItem({ product }: { product: Product }) {
           <button
             onClick={() => {
               addToCart(product);
+              setOpen(true);
             }}
             className="w-full bg-pink-500 text-white font-medium px-4 py-2.5 rounded-xl cursor-pointer hover:bg-pink-600 transition shadow-sm"
           >
             장바구니에 담기
           </button>
         </div>
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={() => setOpen(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <Alert severity="success" sx={{ width: "100%" }}>
+            시술이 추가되었습니다.
+          </Alert>
+        </Snackbar>
       </div>
     </Grid>
   );

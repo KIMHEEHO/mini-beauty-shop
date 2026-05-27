@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Product, CartItem } from "../component/types";
+import type { Product, CartItem } from "../component/types.js";
 
 // 스토어의 상태(State)와 액션(Action) 타입 정의
 interface CartState {

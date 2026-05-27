@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import type { Product, TabValue } from "./types";
-import ProductItem from "./ProductItem";
-import { CategoryTab } from "./CategoryTab";
-import { SearchComponent } from "./SearchComponent";
+import type { Product, TabValue } from "./types.js";
+import ProductItem from "./ProductItem.js";
+import { CategoryTab } from "./CategoryTab.js";
+import { SearchComponent } from "./SearchComponent.js";
 
 export default function ProductList() {
   const [tab, setTab] = useState<TabValue>("lifting");
