@@ -1,16 +1,20 @@
 import { useCartStore } from "../store/useCartStore.js";
+import { useReservationStore } from "../store/useReservationStore.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { formatDate } from "../utils/formatDate.js";
 import { DateComponent } from "../component/DateComponent.js";
 import TimeComponent from "../component/TimeComponent.js";
 import CartTable from "../component/CartTable.js";
+import { AlertDialog } from "../component/AlertDialog.js";
 
 export default function CartPage() {
   const cart = useCartStore((state) => state.cart);
+  const addReservation = useReservationStore((state) => state.addReservation);
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
@@ -53,10 +57,10 @@ export default function CartPage() {
                   .toLocaleString()}
                 원
               </div>
-              <Link
+              {/* <Link
                 to="/order-complete"
                 onClick={() => {
-                  alert("예약완료! 이제 로컬스토리지에 저장할게~? ");
+                  setOpen(true);
                 }}
                 className={`px-8 py-3 rounded-xl font-bold transition-colors ${
                   !selectedTime || !selectedDate
@@ -65,7 +69,43 @@ export default function CartPage() {
                 }`}
               >
                 예약하기
-              </Link>
+              </Link> */}
+              <button
+                disabled={!selectedTime || !selectedDate}
+                onClick={() => setOpen(true)}
+                className={`px-8 py-3 rounded-xl font-bold transition-colors ${
+                  !selectedTime || !selectedDate
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-pink-500 hover:bg-pink-600 text-white"
+                }`}
+              >
+                예약하기
+              </button>
+              <AlertDialog
+                title="예약 확인"
+                description={`예약 날짜: ${
+                  selectedDate ? formatDate(selectedDate) : ""
+                } ${selectedTime}\n총 금액: ${cart
+                  .reduce((sum, item) => sum + item.price * item.quantity, 0)
+                  .toLocaleString()}원\n예약을 진행하시겠습니까?`}
+                open={open}
+                setOpen={setOpen}
+                onConfirm={() => {
+                  if (!selectedDate || !selectedTime) return;
+                  addReservation({
+                    id: crypto.randomUUID(),
+                    date: selectedDate,
+                    time: selectedTime,
+                    items: cart,
+                    totalPrice: cart.reduce(
+                      (sum, item) => sum + item.price * item.quantity,
+                      0,
+                    ),
+                    status: "reserved",
+                  });
+                  navigate("/order-complete");
+                }}
+              />
             </div>
           </>
         )}

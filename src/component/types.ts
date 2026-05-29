@@ -17,3 +17,12 @@ export interface Product {
 export interface CartItem extends Product {
   quantity: number;
 }
+
+export interface Reservation {
+  id: string;
+  date: Date;
+  time: string;
+  items: CartItem[];
+  totalPrice: number;
+  status: "reserved" | "cancelled";
+}
