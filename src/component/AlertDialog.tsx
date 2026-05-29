@@ -31,19 +31,59 @@ export function AlertDialog({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         role="alertdialog"
+        slotProps={{
+          paper: {
+            sx: {
+              borderRadius: 3,
+              padding: 1,
+              minWidth: 360,
+            },
+          },
+        }}
       >
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{ fontWeight: "bold", fontSize: "18px" }}
+        >
+          {title}
+        </DialogTitle>
+
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText
+            id="alert-dialog-description"
+            sx={{ whiteSpace: "pre-line", color: "#6b7280" }}
+          >
             {description}
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>취소</Button>
+
+        <DialogActions sx={{ padding: 2, gap: 1 }}>
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            sx={{
+              borderColor: "#ec4899",
+              color: "#ec4899",
+              "&:hover": {
+                borderColor: "#db2777",
+                backgroundColor: "#fdf2f8",
+              },
+            }}
+          >
+            취소
+          </Button>
+
           <Button
             onClick={() => {
               onConfirm?.();
               handleClose();
+            }}
+            variant="contained"
+            sx={{
+              backgroundColor: "#ec4899",
+              "&:hover": {
+                backgroundColor: "#db2777",
+              },
             }}
             autoFocus
           >
