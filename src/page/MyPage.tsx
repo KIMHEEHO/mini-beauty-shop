@@ -1,12 +1,20 @@
-import { useReservationStore } from "../store/useReservationStore.js";
 import { useNavigate } from "react-router-dom";
 import ReservationTable from "../component/ReservationTable.js";
+import { useEffect, useState } from "react";
+import type { Reservation } from "../component/types.js";
+
 export default function MyPage() {
   const navigate = useNavigate();
-  const reservations = useReservationStore((state) => state.reservations);
-  const cancelReservation = useReservationStore(
-    (state) => state.cancelReservation,
-  );
+  const [reservations, setReservations] = useState<Reservation[]>([]);
+
+  useEffect(() => {
+    fetch("/api/reservations")
+      .then((res) => res.json())
+      .then((data) => {
+        setReservations(data);
+      })
+      .catch((err) => console.error("예약 데이터 로드 실패:", err));
+  }, []);
 
   return (
     <div>
@@ -26,7 +34,10 @@ export default function MyPage() {
           </>
         ) : (
           <>
-            <ReservationTable />
+            <ReservationTable
+              reservations={reservations}
+              setReservations={setReservations}
+            />
           </>
         )}
       </div>

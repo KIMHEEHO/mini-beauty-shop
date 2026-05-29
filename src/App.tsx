@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { Navbar } from "./component/Navbar.js";
-import ProductList from "./component/ProductList.js";
+import ProductList from "./page/ProductListPage.js";
 import CartPage from "./page/CartPage.js";
 import OrderComplete from "./page/OrderComplete.js";
 import MyPage from "./page/MyPage.js";

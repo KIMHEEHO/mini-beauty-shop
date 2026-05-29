@@ -1,17 +1,21 @@
-import { useReservationStore } from "../store/useReservationStore.js";
 import { formatDate } from "../utils/formatDate.js";
 import { useState } from "react";
 import { AlertDialog } from "./AlertDialog.js";
+import type { Reservation } from "./types.js";
 
-export default function ReservationTable({}) {
-  const reservations = useReservationStore((state) => state.reservations);
+type ReservationTableProps = {
+  reservations: Reservation[];
+  setReservations: React.Dispatch<React.SetStateAction<Reservation[]>>;
+};
+export default function ReservationTable({
+  reservations,
+  setReservations,
+}: ReservationTableProps) {
   const [open, setOpen] = useState(false);
   const [selectedReservationId, setSelectedReservationId] = useState<
     string | null
   >(null);
-  const cancelReservation = useReservationStore(
-    (state) => state.cancelReservation,
-  );
+
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
       <div className="grid grid-cols-8 gap-4 p-4 border-b font-bold text-gray-600 bg-gray-50">
@@ -31,7 +35,7 @@ export default function ReservationTable({}) {
           </div>
           <div className="col-span-3 font-medium">
             {" "}
-            {item.items.map((i) => i.name).join(", ")}
+            {item.items.map((i: { name: string }) => i.name).join(", ")}
           </div>
           <div>{item.totalPrice.toLocaleString()}원</div>
           <div>{item.status === "reserved" ? "예약 완료" : "예약취소"}</div>
@@ -55,7 +59,20 @@ export default function ReservationTable({}) {
                   setOpen={setOpen}
                   onConfirm={() => {
                     if (!selectedReservationId) return;
-                    cancelReservation(selectedReservationId);
+                    // cancelReservation(selectedReservationId);
+                    fetch(`/api/reservations/${selectedReservationId}`, {
+                      method: "PATCH",
+                    })
+                      .then((res) => res.json())
+                      .then(() => {
+                        setReservations((prev: Reservation[]) =>
+                          prev.map((res) =>
+                            res.id === selectedReservationId
+                              ? { ...res, status: "cancelled" }
+                              : res,
+                          ),
+                        );
+                      });
                   }}
                 />
               </>

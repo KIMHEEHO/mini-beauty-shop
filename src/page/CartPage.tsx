@@ -79,18 +79,33 @@ export default function CartPage() {
                 setOpen={setOpen}
                 onConfirm={() => {
                   if (!selectedDate || !selectedTime) return;
-                  addReservation({
-                    id: crypto.randomUUID(),
-                    date: selectedDate,
-                    time: selectedTime,
-                    items: cart,
-                    totalPrice: cart.reduce(
-                      (sum, item) => sum + item.price * item.quantity,
-                      0,
-                    ),
-                    status: "reserved",
-                  });
-                  navigate("/order-complete");
+
+                  fetch("/api/reservations", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      id: crypto.randomUUID(),
+                      date: selectedDate,
+                      time: selectedTime,
+                      items: cart,
+                      totalPrice: cart.reduce(
+                        (sum, item) => sum + item.price * item.quantity,
+                        0,
+                      ),
+                      status: "reserved",
+                    }),
+                  })
+                    .then((res) => res.json())
+                    .then(() => {
+                      useCartStore.getState().clearCart();
+                      navigate("/order-complete");
+                    })
+                    .catch((err) => {
+                      console.error("예약 실패:", err);
+                      alert("예약에 실패했습니다. 다시 시도해주세요.");
+                    });
                 }}
               />
             </div>

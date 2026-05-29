@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import type { Product, TabValue } from "./types.js";
-import ProductItem from "./ProductItem.js";
-import { CategoryTab } from "./CategoryTab.js";
-import { SearchComponent } from "./SearchComponent.js";
+import type { Product, TabValue } from "../component/types.js";
+import ProductItem from "../component/ProductItem.js";
+import { CategoryTab } from "../component/CategoryTab.js";
+import { SearchComponent } from "../component/SearchComponent.js";
+import { http } from "msw/core/http";
 
 export default function ProductList() {
   const [tab, setTab] = useState<TabValue>("lifting");
@@ -11,14 +12,12 @@ export default function ProductList() {
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
-  // 컴포넌트가 마운트될 때 products.json에서 상품 데이터를 불러옴
   useEffect(() => {
-    fetch("/mock/product.json")
+    fetch("/api/get_product")
       .then((res) => res.json())
       .then((data: Product[]) => {
         setAllProducts(data);
-      })
-      .catch((err) => console.error("데이터 로드 실패:", err));
+      });
   }, []);
 
   // 디바운싱 적용 : 검색이 완료된 후 1초 뒤에 검색어가 반영됨
