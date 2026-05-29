@@ -5,6 +5,7 @@ import { Navbar } from "./component/Navbar.js";
 import ProductList from "./component/ProductList.js";
 import CartPage from "./page/CartPage.js";
 import OrderComplete from "./page/OrderComplete.js";
+import MyPage from "./page/MyPage.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<ProductList />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/order-complete" element={<OrderComplete />} />
+            <Route path="/my-page" element={<MyPage />} />
           </Routes>
         </main>
       </div>

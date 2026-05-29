@@ -57,19 +57,6 @@ export default function CartPage() {
                   .toLocaleString()}
                 원
               </div>
-              {/* <Link
-                to="/order-complete"
-                onClick={() => {
-                  setOpen(true);
-                }}
-                className={`px-8 py-3 rounded-xl font-bold transition-colors ${
-                  !selectedTime || !selectedDate
-                    ? "bg-gray-300 pointer-events-none"
-                    : "bg-pink-500 hover:bg-pink-600 text-white"
-                }`}
-              >
-                예약하기
-              </Link> */}
               <button
                 disabled={!selectedTime || !selectedDate}
                 onClick={() => setOpen(true)}

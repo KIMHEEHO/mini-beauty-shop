@@ -1,6 +1,7 @@
 import { AppBar, Toolbar } from "@mui/material";
 import { useCartStore } from "../store/useCartStore.js";
 import { Link } from "react-router-dom";
+
 export function Navbar() {
   const cart = useCartStore((state) => state.cart);
 
@@ -18,9 +19,9 @@ export function Navbar() {
       >
         <Toolbar className="max-w-6xl w-full mx-auto flex justify-between items-center px-4">
           <div className="flex-1 text-gray-500 ">
-            <span>
-              <i className="fa-solid fa-bars text-lg cursor-pointer hover:text-pink-500"></i>
-            </span>
+            <Link to="/my-page" className="hover:text-pink-500 transition">
+              <i className="fa-solid fa-user text-xl"></i>
+            </Link>
           </div>
 
           <div className="font-extrabold text-xl tracking-tight text-pink-500 select-none hover:text-pink-600 transition cursor-pointer">
