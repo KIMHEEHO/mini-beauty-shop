@@ -1,9 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navbar } from "./component/NavBar";
-import ProductList from "./component/ProductList";
-import CartPage from "./page/CartPage";
-import OrderComplete from "./page/OrderComplete";
+import "react-datepicker/dist/react-datepicker.css";
+import { Navbar } from "./component/Navbar.js";
+import ProductList from "./component/ProductList.js";
+import CartPage from "./page/CartPage.js";
+import OrderComplete from "./page/OrderComplete.js";
 
 function App() {
   return (

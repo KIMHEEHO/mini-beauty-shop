@@ -1,5 +1,5 @@
 import { AppBar, Toolbar } from "@mui/material";
-import { useCartStore } from "../store/useCartStore";
+import { useCartStore } from "../store/useCartStore.js";
 import { Link } from "react-router-dom";
 export function Navbar() {
   const cart = useCartStore((state) => state.cart);

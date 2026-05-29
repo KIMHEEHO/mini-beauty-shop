@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useCartStore } from "../store/useCartStore";
+import { useCartStore } from "../store/useCartStore.js";
 import { Link } from "react-router-dom";
 export default function OrderComplete() {
   const clearCart = useCartStore((state) => state.clearCart);
