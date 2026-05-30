@@ -61,6 +61,7 @@ export function AlertDialog({
           <Button
             onClick={handleClose}
             variant="outlined"
+            data-cy="cancel-button"
             sx={{
               borderColor: "#ec4899",
               color: "#ec4899",
@@ -79,6 +80,7 @@ export function AlertDialog({
               handleClose();
             }}
             variant="contained"
+            data-cy="confirm-button"
             sx={{
               backgroundColor: "#ec4899",
               "&:hover": {

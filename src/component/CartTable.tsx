@@ -16,6 +16,7 @@ export default function CartTable() {
       {cart.map((item) => (
         <div
           key={item.id}
+          data-cy={`cart-item-${item.id}`}
           className="grid grid-cols-6 gap-4 p-4 items-center border-b"
         >
           <div className="col-span-2 font-medium">{item.name}</div>
@@ -31,6 +32,7 @@ export default function CartTable() {
           </div>
           <button
             onClick={() => removeFromCart(item.id)}
+            data-cy={`remove-from-cart-${item.id}`}
             className="text-red-400 center cursor-pointer hover:text-red-600 transition"
           >
             삭제

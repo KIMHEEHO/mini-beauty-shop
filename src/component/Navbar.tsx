@@ -20,7 +20,10 @@ export function Navbar() {
         <Toolbar className="max-w-6xl w-full mx-auto flex justify-between items-center px-4">
           <div className="flex-1 text-gray-500 ">
             <Link to="/my-page" className="hover:text-pink-500 transition">
-              <i className="fa-solid fa-user text-xl"></i>
+              <i
+                data-cy="mypage-button"
+                className="fa-solid fa-user text-xl"
+              ></i>
             </Link>
           </div>
 
@@ -33,7 +36,10 @@ export function Navbar() {
           >
             <div className="relative">
               <span>
-                <i className="fa-solid fa-cart-arrow-down text-xl"></i>
+                <i
+                  data-cy="cart-button"
+                  className="fa-solid fa-cart-arrow-down text-xl"
+                ></i>
               </span>
               {totalQuantity > 0 && (
                 <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center border-2 border-white">

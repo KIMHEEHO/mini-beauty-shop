@@ -9,7 +9,10 @@ export default function ProductItem({ product }: { product: Product }) {
 
   return (
     <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-full flex flex-col justify-between hover:shadow-md transition">
+      <div
+        data-cy={`product-${product.id}`}
+        className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-full flex flex-col justify-between hover:shadow-md transition"
+      >
         <div>
           <img
             src={product.image}
