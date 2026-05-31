@@ -89,3 +89,35 @@ GET, POST, PATCH 요청을 Mock API로 구현하여 예약 생성 및 예약 취
 - Mock API를 활용한 독립적인 개발 환경 구축
 - E2E 테스트 자동화를 통한 사용자 시나리오 검증 경험
 - 휘발성 상태와 지속성 상태의 차이 및 활용 방법 학습
+- Vue와 React의 상태 관리 및 라우팅 방식 차이 경험
+
+## 🚀 실행 방법 (Getting Started)
+
+프로젝트를 로컬 환경에서 실행하는 방법입니다.
+
+### 1. 저장소 클론 및 패키지 설치
+
+```bash
+# 저장소 클론
+git clone https://github.com/KIMHEEHO/mini-beauty-shop.git
+
+# 프로젝트 폴더로 이동
+cd mini-beauty-shop
+
+# 의존성 설치
+npm install
+```
+
+### 2. 개발 서버 실행
+
+```bash
+npm run dev
+```
+
+## 🧪 테스트 실행
+
+Cypress를 이용한 E2E 테스트를 실행할 수 있습니다.
+
+```bash
+npx cypress open
+```
