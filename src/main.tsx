@@ -6,12 +6,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 async function enableMocking() {
+  console.log("MSW ENV:", import.meta.env.VITE_USE_MSW);
+
   if (import.meta.env.VITE_USE_MSW === "true") {
     const { worker } = await import("./mocks/browser.js");
 
     await worker.start({
       onUnhandledRequest: "bypass",
     });
+
+    console.log("MSW STARTED");
   }
 }
 
