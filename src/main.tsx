@@ -5,18 +5,24 @@ import App from "./App.js";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// 👇 MSW worker
 async function enableMocking() {
   if (import.meta.env.VITE_USE_MSW === "true") {
     const { worker } = await import("./mocks/browser.js");
-    return worker.start();
+
+    await worker.start({
+      onUnhandledRequest: "bypass",
+    });
   }
 }
 
-enableMocking().then(() => {
+async function bootstrap() {
+  await enableMocking();
+
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <App />
     </StrictMode>,
   );
-});
+}
+
+bootstrap();
